@@ -9,7 +9,7 @@ import { RecipeService } from '../../recipe.service';
 })
 export class RecipeItemComponent implements OnInit {
   constructor(private recipeService:RecipeService) { }
-  @Input() recipe:Recipe=new Recipe('','','');
+  @Input() recipe:Recipe=new Recipe('','','',[]);
 
   ngOnInit(): void {
   }
