@@ -13,6 +13,6 @@ export class RecipeItemComponent implements OnInit {
   @Input() index:number=0;
   ngOnInit(): void {
   }
-
+  
  
 }
