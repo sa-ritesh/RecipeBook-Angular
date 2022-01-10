@@ -4,11 +4,15 @@ import { Ingredient } from "../shared/ingredient.model";
 
 export class ShoppingListService{
   ingredientsChanged=new Subject<Ingredient[]>();
+  startedEditing=new Subject<number>();
   private ingredients:Ingredient[]=[new Ingredient('Lal Mirch',100),new Ingredient('Hari Mirch',100)];
 
   getIngredients(){
       //to pass copy
       return this.ingredients.slice();
+  }
+  getIngredient(index:number) : Ingredient{
+   return this.ingredients[index];
   }
   addIngredient(ingredient:Ingredient){
       this.ingredients.push(ingredient);
