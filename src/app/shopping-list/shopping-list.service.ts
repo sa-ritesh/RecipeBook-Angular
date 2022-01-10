@@ -11,6 +11,10 @@ export class ShoppingListService{
       //to pass copy
       return this.ingredients.slice();
   }
+  updateIngredient(index:number,newIngredient:Ingredient){
+  this.ingredients[index]=newIngredient;
+  this.ingredientsChanged.next(this.ingredients);
+  }
   getIngredient(index:number) : Ingredient{
    return this.ingredients[index];
   }
