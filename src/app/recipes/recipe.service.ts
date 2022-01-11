@@ -9,6 +9,7 @@ export class RecipeService{
 
     }
    recipeSelected=new Subject<Recipe>();
+   recipeChanged=new Subject<Recipe[]>();
    private recipes:Recipe[]=[
         new Recipe('A Test Recipe', 'This is simply a test', 'https://upload.wikimedia.org/wikipedia/commons/1/15/Recipe_logo.jpeg',[new Ingredient('Meat',1), new Ingredient('Feet',1)]),
         new Recipe('A Test Recipe', 'This is simply a test', 'https://upload.wikimedia.org/wikipedia/commons/1/15/Recipe_logo.jpeg',[new Ingredient('Meat',1), new Ingredient('Feet',1)])
@@ -21,5 +22,13 @@ export class RecipeService{
     }
     getRecipeMethod(index:number):Recipe{
       return this.recipes.slice()[index];
+    }
+    addRecipe(recipe:Recipe){
+     this.recipes.push(recipe);
+     this.recipeChanged.next(this.recipes.slice());
+    }
+    updateRecipe(index:number,newRecipe:Recipe){
+     this.recipes[index]=newRecipe;
+     this.recipeChanged.next(this.recipes.slice());
     }
 }
