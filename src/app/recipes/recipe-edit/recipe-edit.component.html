@@ -6,6 +6,7 @@
             <button
               type="submit"
               class="btn btn-success"
+              [disabled]="!recipeForm.valid"
             >Save</button>
             <button type="button" class="btn btn-danger">Cancel</button>
           </div>
@@ -70,6 +71,7 @@
                 <input
                   type="number"
                   class="form-control"
+                  min="1"
                   formControlName="amount">
               </div>
               <div class="col-xs-2">
@@ -85,6 +87,7 @@
                 <button
                   type="button"
                   class="btn btn-success"
+                  (click)="onAddIngredient()"
                  >Add Ingredient</button>
               </div>
             </div>
