@@ -18,7 +18,7 @@ export class RecipeEditComponent implements OnInit {
     this.route.params.subscribe((params:Params)=>{
        this.id=+params['id'];
        this.editMode=params['id']!=null;
-       this.initForm();
+       this.initForm(); 
     })
   }
   private initForm(){
@@ -37,5 +37,7 @@ export class RecipeEditComponent implements OnInit {
       'description': new FormControl(recipeDescription)
     })
   }
-
+  onSubmit(){
+    console.log(this.recipeForm);
+  }
 }
