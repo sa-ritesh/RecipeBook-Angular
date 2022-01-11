@@ -10,10 +10,10 @@ import { ShoppingListComponent } from "./shopping-list/shopping-list.component";
 const appRoutes:Routes=[
     {path:'',redirectTo:'/recipes',pathMatch:'full'},
     {path:'recipes',component:RecipesComponent, children:[
-        {path:'',component:RecipeStartComponent,pathMatch:'full'},
-        {path:'new',component:RecipeEditComponent,pathMatch:'full'},
-        {path:':id',component:RecipeDetailComponent,pathMatch:'full'},
-        {path:':id/edit',component:RecipeEditComponent,pathMatch:'full'}
+        {path:'',component:RecipeStartComponent},
+        {path:'new',component:RecipeEditComponent},
+        {path:':id',component:RecipeDetailComponent},
+        {path:':id/edit',component:RecipeEditComponent}
     ]},
     {path:'shopping-list',component:ShoppingListComponent},
 
