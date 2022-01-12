@@ -12,9 +12,14 @@ import { RecipeService } from './recipe.service';
 @Injectable()
 export class RecipesResolverService implements Resolve<Recipe[]> {
   constructor(
-    private dataStorageService: DataStorageService) {}    
+    private dataStorageService: DataStorageService,private recipesService: RecipeService) {}    
   resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
-      console.log('s');
-      return this.dataStorageService.fetchRecipes();    
+    const recipes = this.recipesService.getRecipesMethod();
+
+    if (recipes.length === 0) {
+      return this.dataStorageService.fetchRecipes();
+    } else {
+      return recipes;
+    }
   }
 }
