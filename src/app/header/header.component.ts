@@ -1,14 +1,13 @@
 import { Component, EventEmitter, Output } from "@angular/core";
+import { DataStorageService } from "../recipes/data-storabe.service";
 @Component({
     selector:'app-header',
     templateUrl:'./header.component.html',
 })
 export class HeaderComponent{
-@Output() answer=new EventEmitter<{ans:string}>();
-onRecipe(){
-    this.answer.emit({ans:'recipe'});
-}
-onShop(){
-    this.answer.emit({ans:'shop'});
-}
+    constructor(private dataStorageService:DataStorageService){
+    }
+    onSaveData(){
+        this.dataStorageService.storeRecipes();
+    }
 }
