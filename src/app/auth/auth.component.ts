@@ -11,10 +11,13 @@ export class AuthComponent {
 
     }
     isLoginMode:boolean=false;
+    isLoading:boolean=false;
+    error:string='';
     onSwitchMode(){
        this.isLoginMode=!this.isLoginMode;
     }
     onSubmit(form:NgForm){
+        this.isLoading=true;
         if(this.isLoginMode){
 
         }
@@ -24,10 +27,13 @@ export class AuthComponent {
             }
            const email=form.value.email;
            const password=form.value.password;
-           this.authService.signUp(email,password).subscribe((resData)=>{
-            console.log(resData);
+           this.authService.signUp(email,password).subscribe(
+            resData=>{
+                this.isLoading=false;
+                console.log(resData);
            },error=>{
-               console.log(error);
+            this.isLoading=false;
+            this.error=error.message;
            })
            form.reset();
         }
