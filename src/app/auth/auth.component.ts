@@ -1,12 +1,18 @@
 import { Component } from '@angular/core';
+import { NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-auth',
   templateUrl: './auth.component.html'
 })
 export class AuthComponent {
-    isLoggedIn:boolean=false;
-    onSwitch(){
-       this.isLoggedIn=!this.isLoggedIn;
+    isLoginMode:boolean=false;
+    onSwitchMode(){
+       this.isLoginMode=!this.isLoginMode;
+    }
+    onSubmit(form:NgForm){
+        console.log('sas');
+       console.log(form.value);
+       form.reset();
     }
 }
