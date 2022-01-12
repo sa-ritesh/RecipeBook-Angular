@@ -10,10 +10,11 @@ export class RecipeService{
     }
    recipeSelected=new Subject<Recipe>();
    recipeChanged=new Subject<Recipe[]>();
-   private recipes:Recipe[]=[
-        new Recipe('A Test Recipe', 'This is simply a test', 'https://upload.wikimedia.org/wikipedia/commons/1/15/Recipe_logo.jpeg',[new Ingredient('Meat',1), new Ingredient('Feet',1)]),
-        new Recipe('A Test Recipe', 'This is simply a test', 'https://upload.wikimedia.org/wikipedia/commons/1/15/Recipe_logo.jpeg',[new Ingredient('Meat',1), new Ingredient('Feet',1)])
-      ];
+  //  private recipes:Recipe[]=[
+  //       new Recipe('A Test Recipe', 'This is simply a test', 'https://upload.wikimedia.org/wikipedia/commons/1/15/Recipe_logo.jpeg',[new Ingredient('Meat',1), new Ingredient('Feet',1)]),
+  //       new Recipe('A Test Recipe', 'This is simply a test', 'https://upload.wikimedia.org/wikipedia/commons/1/15/Recipe_logo.jpeg',[new Ingredient('Meat',1), new Ingredient('Feet',1)])
+  //     ];
+  private recipes:Recipe[]=[];
     setRecipes(recipes:Recipe[]){
          this.recipes=recipes;
          this.recipeChanged.next(this.recipes.slice())
