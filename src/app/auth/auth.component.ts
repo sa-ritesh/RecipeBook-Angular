@@ -12,6 +12,9 @@ export class AuthComponent {
     constructor(private authService:AuthService, private router:Router){
 
     }
+    onCloseError(){
+        this.error='';
+    }
     isLoginMode:boolean=false;
     isLoading:boolean=false;
     authObs:Observable<AuthResponseData>=EMPTY;
