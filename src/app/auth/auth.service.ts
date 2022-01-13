@@ -17,6 +17,7 @@ export interface AuthResponseData {
 @Injectable()
 export class AuthService{
     constructor(private http:HttpClient, private router:Router){}
+    private tokenExpirationTimer:any;
     user = new BehaviorSubject<User>(new User('a','a','a',new Date));
     signUp(email:string,password:string){
       return this.http.post<AuthResponseData>('https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyDsTbazG9AJqjEH5PiF8YZlWVNrV_Hczr4',{
@@ -68,9 +69,14 @@ export class AuthService{
   
       if (loadedUser.token!='') {
         this.user.next(loadedUser);
-        // const expirationDuration =new Date(userData._tokenExpirationDate).getTime() -new Date().getTime();
-        // this.autoLogout(expirationDuration);
+        const expirationDuration=new Date(userData._tokenExpirationDate).getTime() -new Date().getTime();
+        this.autoLogout(expirationDuration);
       }
+    }
+    autoLogout(expirationDuration: number) {
+      this.tokenExpirationTimer = setTimeout(() => {
+        this.logout();
+      }, expirationDuration);
     }
     private handleAuthentication(
       email: string,
@@ -81,7 +87,7 @@ export class AuthService{
       const expirationDate = new Date(new Date().getTime() + expiresIn * 1000);
       const user = new User(email, userId, token, expirationDate);
       this.user.next(user);
-      // this.autoLogout(expiresIn * 1000);
+      this.autoLogout(expiresIn * 1000);
       localStorage.setItem('userData', JSON.stringify(user));
     }
     private handleError(errorRes:HttpErrorResponse){
@@ -100,6 +106,11 @@ export class AuthService{
     }
     logout(){
       this.user.next(new User('a','a','a',new Date));
-      this.router.navigate(['/auth'])
+      this.router.navigate(['/auth']);
+      localStorage.clear();
+      if (this.tokenExpirationTimer) {
+        clearTimeout(this.tokenExpirationTimer);
+      }
+      this.tokenExpirationTimer = null;
     }
 }
