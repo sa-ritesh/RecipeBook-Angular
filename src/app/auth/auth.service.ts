@@ -48,6 +48,30 @@ export class AuthService{
         );
       }));
     }
+    autoLogin() {
+      const userData: {
+        email: any;
+        id: any;
+        _token: any;
+        _tokenExpirationDate: any;
+      } = JSON.parse(localStorage.getItem('userData') || '{}');
+      if (!userData) {
+        return;
+      }
+  
+      const loadedUser = new User(
+        userData.email,
+        userData.id,
+        userData._token,
+        new Date(userData._tokenExpirationDate)
+      );
+  
+      if (loadedUser.token!='') {
+        this.user.next(loadedUser);
+        // const expirationDuration =new Date(userData._tokenExpirationDate).getTime() -new Date().getTime();
+        // this.autoLogout(expirationDuration);
+      }
+    }
     private handleAuthentication(
       email: string,
       userId: string,
@@ -58,7 +82,7 @@ export class AuthService{
       const user = new User(email, userId, token, expirationDate);
       this.user.next(user);
       // this.autoLogout(expiresIn * 1000);
-      // localStorage.setItem('userData', JSON.stringify(user));
+      localStorage.setItem('userData', JSON.stringify(user));
     }
     private handleError(errorRes:HttpErrorResponse){
       let errorMessage='Unknown Error';
