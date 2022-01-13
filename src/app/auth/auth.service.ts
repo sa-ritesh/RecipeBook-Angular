@@ -1,6 +1,7 @@
+import { DATE_PIPE_DEFAULT_TIMEZONE } from "@angular/common";
 import { HttpClient, HttpErrorResponse } from "@angular/common/http";
 import { Injectable } from "@angular/core";
-import { Subject, throwError } from "rxjs";
+import { BehaviorSubject,throwError } from "rxjs";
 import { catchError,tap } from "rxjs/operators";
 import { User } from "./user.model";
 export interface AuthResponseData {
@@ -15,7 +16,7 @@ export interface AuthResponseData {
 @Injectable()
 export class AuthService{
     constructor(private http:HttpClient){}
-    user=new Subject<User>();
+    user = new BehaviorSubject<User>(new User('a','a','a',new Date));
     signUp(email:string,password:string){
       return this.http.post<AuthResponseData>('https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyDsTbazG9AJqjEH5PiF8YZlWVNrV_Hczr4',{
            email:email,
