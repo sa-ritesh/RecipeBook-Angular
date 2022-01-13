@@ -31,9 +31,10 @@ export class AuthComponent {
             resData=>{
                 this.isLoading=false;
                 console.log(resData);
-           },error=>{
+           },errorMessage=>{
             this.isLoading=false;
-            this.error=error.message;
+            this.error=errorMessage;
+            
            })
            form.reset();
         }
