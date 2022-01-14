@@ -6,7 +6,7 @@ import { AuthResponseData, AuthService } from './auth.service';
 
 @Component({
   selector: 'app-auth',
-  templateUrl: './auth.component.html'
+  templateUrl: './auth.component.html',
 })
 export class AuthComponent {
     constructor(private authService:AuthService, private router:Router){
@@ -40,7 +40,7 @@ export class AuthComponent {
         this.authObs.subscribe(
             resData=>{
                 this.isLoading=false;
-                this,this.router.navigate(['./recipes'])
+                this.router.navigate(['./recipes'])
                 console.log(resData);
            },errorMessage=>{
             this.isLoading=false;
